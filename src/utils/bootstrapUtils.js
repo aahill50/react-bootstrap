@@ -12,13 +12,13 @@ function curry(fn) {
   };
 }
 
-export function prefix(props = {}, variant) {
+export const prefix = (props = {}, variant) => {
   invariant(
     (props.bsClass || '').trim(),
     'A `bsClass` prop is required for this component'
   );
   return props.bsClass + (variant ? `-${variant}` : '');
-}
+};
 
 export const bsClass = curry((defaultClass, Component) => {
   let propTypes = Component.propTypes || (Component.propTypes = {});
@@ -109,7 +109,7 @@ export const bsSizes = curry((sizes, defaultSize, Component) => {
   return Component;
 });
 
-export function getClassSet(props) {
+export const getClassSet = (props) => {
   const classes = {
     [prefix(props)]: true,
   };
@@ -124,14 +124,14 @@ export function getClassSet(props) {
   }
 
   return classes;
-}
+};
 
 /**
  * Add a style variant to a Component. Mutates the propTypes of the component
  * in order to validate the new variant.
  */
-export function addStyle(Component, ...styleVariant) {
+export const addStyle = (Component, ...styleVariant) => {
   bsStyles(styleVariant, Component);
-}
+};
 
 export const _curry = curry;
